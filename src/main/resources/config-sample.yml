@@ -1,0 +1,11 @@
+SSH_URL: ""
+SSH_PORT: ""
+SSH_USER: ""
+
+DB_URL: ""
+DB_PORT: ""
+DB_NAME: ""
+DB_USERNAME: ""
+DB_PASSWORD: ""
+
+ADMIN_SESSION: ""
