@@ -1,10 +1,10 @@
-package org.arc.raders;
+package org.arc.raiders;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ArcRadersApplicationTests {
+class ArcRaidersApplicationTests {
 
     @Test
     void contextLoads() {

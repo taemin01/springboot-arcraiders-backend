@@ -1,13 +1,13 @@
-package org.arc.raders;
+package org.arc.raiders;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ArcRadersApplication {
+public class ArcRaidersApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ArcRadersApplication.class, args);
+        SpringApplication.run(ArcRaidersApplication.class, args);
     }
 
 }
