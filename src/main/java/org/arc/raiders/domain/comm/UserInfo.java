@@ -1,4 +1,4 @@
-package org.arc.raiders.domain;
+package org.arc.raiders.domain.comm;
 
 import jakarta.persistence.*;
 import lombok.Getter;

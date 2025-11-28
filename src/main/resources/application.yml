@@ -24,3 +24,7 @@ server:
       timeout: 30m
   netty:
     connection-timeout: 30s
+
+jwt:
+  secret: change-this-secret-key-very-long
+  expiration-ms: 86400000   # 24시간 (원하면 값 바꿔)

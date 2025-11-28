@@ -1,6 +1,6 @@
-package org.arc.raiders.repository;
+package org.arc.raiders.repository.comm;
 
-import org.arc.raiders.domain.UserInfo;
+import org.arc.raiders.domain.comm.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

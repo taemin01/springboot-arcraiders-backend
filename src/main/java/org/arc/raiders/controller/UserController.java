@@ -1,7 +1,9 @@
 package org.arc.raiders.controller;
 
-import org.arc.raiders.domain.UserInfo;
-import org.arc.raiders.service.UserService;
+import org.arc.raiders.domain.comm.LoginRequest;
+import org.arc.raiders.domain.comm.LoginResponse;
+import org.arc.raiders.domain.comm.UserInfo;
+import org.arc.raiders.service.comm.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +40,12 @@ public class UserController {
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("회원가입 처리 중 오류가 발생했습니다.");
         }
+    }
+
+    // ★ 로그인 API
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+        String token = userService.login(request.getUsername(), request.getPassword());
+        return ResponseEntity.ok(new LoginResponse(token));
     }
 }
