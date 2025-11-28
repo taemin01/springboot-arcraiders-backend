@@ -1,4 +1,4 @@
-package org.arc.raiders.dto;
+package org.arc.raiders.domain.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

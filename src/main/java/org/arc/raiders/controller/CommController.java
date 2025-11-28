@@ -3,31 +3,31 @@ package org.arc.raiders.controller;
 import org.arc.raiders.domain.comm.LoginRequest;
 import org.arc.raiders.domain.comm.LoginResponse;
 import org.arc.raiders.domain.comm.UserInfo;
-import org.arc.raiders.service.comm.UserService;
+import org.arc.raiders.service.comm.CommService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/comm")
 @CrossOrigin(origins = "http://localhost:3000") // Vite dev 서버
-public class UserController {
+public class CommController {
 
-    private final UserService userService;
+    private final CommService commService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public CommController(CommService commService) {
+        this.commService = commService;
     }
 
     // ===== DTO =====
     public record SignupRequest(String username, String password) {}
-    public record SignupResponse(Integer id, String username) {}
+    public record SignupResponse(String id, String username) {}
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         try {
-            UserInfo user = userService.signup(request.username(), request.password());
-            SignupResponse response = new SignupResponse(user.getId(), user.getUsername());
+            UserInfo user = commService.signup(request.username(), request.password());
+            SignupResponse response = new SignupResponse(user.getUserName(), user.getPassword());
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (IllegalArgumentException e) {
             // 중복 아이디 등 비즈니스 오류
@@ -45,7 +45,7 @@ public class UserController {
     // ★ 로그인 API
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        String token = userService.login(request.getUsername(), request.getPassword());
+        String token = commService.login(request.getUsername(), request.getPassword());
         return ResponseEntity.ok(new LoginResponse(token));
     }
 }

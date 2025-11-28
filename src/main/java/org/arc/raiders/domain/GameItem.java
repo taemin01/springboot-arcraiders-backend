@@ -37,13 +37,8 @@ public class GameItem {
     @Column(nullable = false, length = 100)
     private String seller;
 
-    private Integer level;
-
-    @Column(length = 50)
-    private String rarity;
-
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    protected GameItem() {}
+    public GameItem() {}
 }
