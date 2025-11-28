@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("adminCategoryRepository")
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     // categoryName으로 조회

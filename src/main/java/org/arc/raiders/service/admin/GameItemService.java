@@ -1,16 +1,15 @@
 package org.arc.raiders.service.admin;
 
 import org.arc.raiders.domain.GameItem;
-import org.arc.raiders.repository.GameItemRepository;
+import org.arc.raiders.repository.comm.GameItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("adminGameItemService")
 @Transactional
 public class GameItemService {
 

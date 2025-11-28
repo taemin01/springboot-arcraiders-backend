@@ -1,4 +1,4 @@
-package org.arc.raiders.repository;
+package org.arc.raiders.repository.comm;
 
 import org.arc.raiders.domain.GameItem;
 import org.springframework.data.jpa.repository.JpaRepository;
