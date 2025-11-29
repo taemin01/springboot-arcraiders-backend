@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*")
 public class UserInfoController {
 
     private final AdminUserInfoService adminUserInfoService;

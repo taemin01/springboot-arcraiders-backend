@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/comm")
-@CrossOrigin(origins = "http://localhost:3000") // Vite dev 서버
+//@CrossOrigin(origins = "http://localhost:3000") // Vite dev 서버
 public class CommController {
 
     private final CommService commService;
