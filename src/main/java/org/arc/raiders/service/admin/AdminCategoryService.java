@@ -1,7 +1,7 @@
 package org.arc.raiders.service.admin;
 
 import org.arc.raiders.domain.admin.Category;
-import org.arc.raiders.repository.admin.CategoryRepository;
+import org.arc.raiders.repository.admin.AdminCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,12 +11,13 @@ import java.util.Optional;
 
 @Service("adminCategoryService")
 @Transactional
-public class CategoryService {
 
-    private final CategoryRepository categoryRepository;
+public class AdminCategoryService {
+
+    private final AdminCategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository) {
+    public AdminCategoryService(AdminCategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 

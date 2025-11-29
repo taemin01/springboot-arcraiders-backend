@@ -1,7 +1,7 @@
 package org.arc.raiders.controller;
 
 import org.arc.raiders.domain.comm.UserInfo;
-import org.arc.raiders.service.admin.UserInfoService;
+import org.arc.raiders.service.admin.AdminUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +17,17 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 public class UserInfoController {
 
-    private final UserInfoService userInfoService;
+    private final AdminUserInfoService adminUserInfoService;
 
     @Autowired
-    public UserInfoController(UserInfoService userInfoService) {
-        this.userInfoService = userInfoService;
+    public UserInfoController(AdminUserInfoService adminUserInfoService) {
+        this.adminUserInfoService = adminUserInfoService;
     }
 
     // 전체 유저 목록 조회 (비밀번호 제외)
     @GetMapping
     public ResponseEntity<List<Map<String, Object>>> getAllUsers() {
-        List<UserInfo> users = userInfoService.getAllUsers();
+        List<UserInfo> users = adminUserInfoService.getAllUsers();
 
         List<Map<String, Object>> response = users.stream()
                 .map(this::toResponseMap)
@@ -39,7 +39,7 @@ public class UserInfoController {
     // ID로 유저 조회
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
-        return userInfoService.getUserById(id)
+        return adminUserInfoService.getUserById(id)
                 .map(user -> ResponseEntity.ok(toResponseMap(user)))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -48,7 +48,7 @@ public class UserInfoController {
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest request) {
         try {
-            UserInfo createdUser = userInfoService.createUser(request.getUserName(), request.getPassword());
+            UserInfo createdUser = adminUserInfoService.createUser(request.getUserName(), request.getPassword());
             return ResponseEntity.status(HttpStatus.CREATED).body(toResponseMap(createdUser));
         } catch (RuntimeException e) {
             Map<String, String> error = new HashMap<>();
@@ -61,7 +61,7 @@ public class UserInfoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UpdateUserRequest request) {
         try {
-            UserInfo updatedUser = userInfoService.updateUser(id, request.getUserName(), request.getPassword());
+            UserInfo updatedUser = adminUserInfoService.updateUser(id, request.getUserName(), request.getPassword());
             return ResponseEntity.ok(toResponseMap(updatedUser));
         } catch (RuntimeException e) {
             Map<String, String> error = new HashMap<>();
@@ -74,7 +74,7 @@ public class UserInfoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         try {
-            userInfoService.deleteUser(id);
+            adminUserInfoService.deleteUser(id);
             Map<String, String> response = new HashMap<>();
             response.put("message", "사용자가 삭제되었습니다.");
             return ResponseEntity.ok(response);

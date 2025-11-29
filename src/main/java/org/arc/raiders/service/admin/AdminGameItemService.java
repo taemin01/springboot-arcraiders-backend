@@ -9,14 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service("adminGameItemService")
+@Service
 @Transactional
-public class GameItemService {
+public class AdminGameItemService {
 
     private final GameItemRepository gameItemRepository;
 
     @Autowired
-    public GameItemService(GameItemRepository gameItemRepository) {
+    public AdminGameItemService(GameItemRepository gameItemRepository) {
         this.gameItemRepository = gameItemRepository;
     }
 

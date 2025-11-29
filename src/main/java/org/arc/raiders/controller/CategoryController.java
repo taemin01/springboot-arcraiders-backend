@@ -1,7 +1,7 @@
 package org.arc.raiders.controller;
 
 import org.arc.raiders.domain.admin.Category;
-import org.arc.raiders.service.admin.CategoryService;
+import org.arc.raiders.service.admin.AdminCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,24 +16,24 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class CategoryController {
 
-    private final CategoryService categoryService;
+    private final AdminCategoryService adminCategoryService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    public CategoryController(AdminCategoryService adminCategoryService) {
+        this.adminCategoryService = adminCategoryService;
     }
 
     // 전체 카테고리 조회
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {
-        List<Category> categories = categoryService.getAllCategories();
+        List<Category> categories = adminCategoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 
     // ID로 카테고리 조회
     @GetMapping("/{id}")
     public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
-        return categoryService.getCategoryById(id)
+        return adminCategoryService.getCategoryById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -41,14 +41,14 @@ public class CategoryController {
     // 메인 카테고리만 조회
     @GetMapping("/main")
     public ResponseEntity<List<Category>> getMainCategories() {
-        List<Category> categories = categoryService.getMainCategories();
+        List<Category> categories = adminCategoryService.getMainCategories();
         return ResponseEntity.ok(categories);
     }
 
     // 특정 카테고리의 서브카테고리 조회
     @GetMapping("/sub/{categoryName}")
     public ResponseEntity<List<Category>> getSubCategories(@PathVariable String categoryName) {
-        List<Category> categories = categoryService.getSubCategories(categoryName);
+        List<Category> categories = adminCategoryService.getSubCategories(categoryName);
         return ResponseEntity.ok(categories);
     }
 
@@ -56,7 +56,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<?> createCategory(@RequestBody CategoryRequest request) {
         try {
-            Category created = categoryService.createCategory(
+            Category created = adminCategoryService.createCategory(
                     request.getCategoryName(),
                     request.getSubCategoryName(),
                     request.getCodeType()
@@ -73,7 +73,7 @@ public class CategoryController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody CategoryRequest request) {
         try {
-            Category updated = categoryService.updateCategory(
+            Category updated = adminCategoryService.updateCategory(
                     id,
                     request.getCategoryName(),
                     request.getSubCategoryName(),
@@ -91,7 +91,7 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
         try {
-            categoryService.deleteCategory(id);
+            adminCategoryService.deleteCategory(id);
             Map<String, String> response = new HashMap<>();
             response.put("message", "카테고리가 삭제되었습니다.");
             return ResponseEntity.ok(response);
